@@ -1,7 +1,4 @@
 const computerSelection = getComputerChoice();
-// const playerSelection = prompt(
-//   `Do you choose rock, paper or scissors`
-// ).toUpperCase();
 let playerScore = 0;
 let computerScore = 0;
 
@@ -40,20 +37,6 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-// game count
-// do 5 games
-// tie do not score
-// final score after 5 games
-
-function playGame() {
-  for (let i = 1; i < 6; i++) {
-    const playerSelection = prompt(
-      `Do you choose rock, paper or scissors`
-    ).toUpperCase();
-    const computerSelection = getComputerChoice();
-    console.log(playRound(playerSelection, computerSelection));
-  }
-  console.log(`Final score : ${playerScore} to ${computerScore}`);
-}
+function playGame() {}
 
 playGame();
