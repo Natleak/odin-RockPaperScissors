@@ -37,6 +37,14 @@ function playRound(playerSelection, computerSelection) {
   }
 }
 
-function playGame() {}
+const rockBtn = document.querySelector(".button_rock");
+const paperBtn = document.querySelector(".button_paper");
+const scissorsBtn = document.querySelector(".button_scissors");
+const scorePlayer = document.querySelector(".player_score");
+const scoreComputer = document.querySelector(".computer_score");
+const resultMessage = document.querySelector(".round_result");
 
-playGame();
+rockBtn.addEventListener("click", () => {
+  const playerSelection = "ROCK";
+  playRound(playerSelection, computerSelection);
+});
