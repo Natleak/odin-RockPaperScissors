@@ -13,7 +13,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    resultMessage.textContent = `It's a tie, you both choose ${playerSelection}.`;
+    roundResult.textContent = `It's a tie, you both choose ${playerSelection}.`;
   } else {
     if (
       (playerSelection === "ROCK" && computerSelection === "PAPER") ||
@@ -21,7 +21,7 @@ function playRound(playerSelection, computerSelection) {
       (playerSelection === "SCISSORS" && computerSelection === "ROCK")
     ) {
       computerScore++;
-      resultMessage.textContent = `You loose, ${computerSelection} beats ${playerSelection}.`;
+      roundResult.textContent = `You loose, ${computerSelection} beats ${playerSelection}.`;
       scoreComputer.textContent = `Computer Score : ${computerScore}`;
     } else {
       if (
@@ -30,7 +30,7 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "SCISSORS" && computerSelection === "PAPER")
       ) {
         playerScore++;
-        resultMessage.textContent = `You win, ${playerSelection} beats ${computerSelection}.`;
+        roundResult.textContent = `You win, ${playerSelection} beats ${computerSelection}.`;
         scorePlayer.textContent = `Player Score : ${playerScore}`;
       }
     }
@@ -42,22 +42,39 @@ const paperBtn = document.querySelector(".button_paper");
 const scissorsBtn = document.querySelector(".button_scissors");
 const scorePlayer = document.querySelector(".player_score");
 const scoreComputer = document.querySelector(".computer_score");
-const resultMessage = document.querySelector(".round_result");
+const roundResult = document.querySelector(".round_result");
 
 rockBtn.addEventListener("click", () => {
   const playerSelection = "ROCK";
   const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
+  whoWin(playerScore, computerScore);
 });
 
 paperBtn.addEventListener("click", () => {
   const playerSelection = "PAPER";
   const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
+  whoWin(playerScore, computerScore);
 });
 
 scissorsBtn.addEventListener("click", () => {
   const playerSelection = "SCISSORS";
   const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
+  whoWin(playerScore, computerScore);
 });
+
+function whoWin(playerScore, computerScore) {
+  if (playerScore === 5) {
+    const matchWinner = document.createElement("h2");
+    matchWinner.textContent = `Congrats, you beat the computer ${playerScore} to ${computerScore}`;
+    roundResult.appendChild(matchWinner);
+  } else {
+    if (computerScore === 5) {
+      const matchWinner = document.createElement("h2");
+      matchWinner.textContent = `Sorry, Computer beats you ${computerScore} to ${playerScore}`;
+      roundResult.appendChild(matchWinner);
+    }
+  }
+}
