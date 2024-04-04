@@ -13,7 +13,7 @@ function getComputerChoice() {
 
 function playRound(playerSelection, computerSelection) {
   if (playerSelection === computerSelection) {
-    return `It's a tie, you both choose ${playerSelection}. Score is ${playerScore} to ${computerScore}`;
+    resultMessage.textContent = `It's a tie, you both choose ${playerSelection}.`;
   } else {
     if (
       (playerSelection === "ROCK" && computerSelection === "PAPER") ||
@@ -21,7 +21,8 @@ function playRound(playerSelection, computerSelection) {
       (playerSelection === "SCISSORS" && computerSelection === "ROCK")
     ) {
       computerScore++;
-      return `You loose, ${computerSelection} beats ${playerSelection}. Score is ${playerScore} to ${computerScore}`;
+      resultMessage.textContent = `You loose, ${computerSelection} beats ${playerSelection}.`;
+      scoreComputer.textContent = `Computer Score : ${computerScore}`;
     } else {
       if (
         (playerSelection === "ROCK" && computerSelection === "SCISSORS") ||
@@ -29,9 +30,8 @@ function playRound(playerSelection, computerSelection) {
         (playerSelection === "SCISSORS" && computerSelection === "PAPER")
       ) {
         playerScore++;
-        return `You win, ${playerSelection} beats ${computerSelection}. Score is ${playerScore} to ${computerScore}`;
-      } else {
-        return `${playerSelection} is not a possibility`;
+        resultMessage.textContent = `You win, ${playerSelection} beats ${computerSelection}.`;
+        scorePlayer.textContent = `Player Score : ${playerScore}`;
       }
     }
   }
@@ -46,5 +46,18 @@ const resultMessage = document.querySelector(".round_result");
 
 rockBtn.addEventListener("click", () => {
   const playerSelection = "ROCK";
+  const computerSelection = getComputerChoice();
+  playRound(playerSelection, computerSelection);
+});
+
+paperBtn.addEventListener("click", () => {
+  const playerSelection = "PAPER";
+  const computerSelection = getComputerChoice();
+  playRound(playerSelection, computerSelection);
+});
+
+scissorsBtn.addEventListener("click", () => {
+  const playerSelection = "SCISSORS";
+  const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
 });
