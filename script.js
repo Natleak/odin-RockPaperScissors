@@ -43,38 +43,56 @@ const scissorsBtn = document.querySelector(".button_scissors");
 const scorePlayer = document.querySelector(".player_score");
 const scoreComputer = document.querySelector(".computer_score");
 const roundResult = document.querySelector(".round_result");
+const resetBtn = document.querySelector(".reset_button");
+resetBtn.style.visibility = "hidden";
 
 rockBtn.addEventListener("click", () => {
   const playerSelection = "ROCK";
   const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
-  whoWin(playerScore, computerScore);
+  gameWinner(playerScore, computerScore);
 });
 
 paperBtn.addEventListener("click", () => {
   const playerSelection = "PAPER";
   const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
-  whoWin(playerScore, computerScore);
+  gameWinner(playerScore, computerScore);
 });
 
 scissorsBtn.addEventListener("click", () => {
   const playerSelection = "SCISSORS";
   const computerSelection = getComputerChoice();
   playRound(playerSelection, computerSelection);
-  whoWin(playerScore, computerScore);
+  gameWinner(playerScore, computerScore);
 });
 
-function whoWin(playerScore, computerScore) {
+resetBtn.addEventListener("click", () => {
+  resetGame();
+});
+
+function gameWinner(playerScore, computerScore) {
   if (playerScore === 5) {
     const matchWinner = document.createElement("h2");
     matchWinner.textContent = `Congrats, you beat the computer ${playerScore} to ${computerScore}`;
     roundResult.appendChild(matchWinner);
+    resetBtn.style.visibility = "visible";
   } else {
     if (computerScore === 5) {
       const matchWinner = document.createElement("h2");
       matchWinner.textContent = `Sorry, Computer beats you ${computerScore} to ${playerScore}`;
       roundResult.appendChild(matchWinner);
+      resetBtn.style.visibility = "visible";
     }
   }
+}
+
+function resetGame() {
+  resetBtn.style.visibility = "hidden";
+  playerScore = 0;
+  computerScore = 0;
+  scorePlayer.textContent = "Player Score : 0";
+  scoreComputer.textContent = "Computer Score : 0";
+  roundResult.textContent = "";
+  matchWinner.textContent = "";
 }
